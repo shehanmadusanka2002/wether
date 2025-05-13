@@ -1,4 +1,4 @@
-import CardWhether from './components/CatdWhether'
+import CardWhether from './components/CardWhether'
 
 function App() {
  
@@ -10,4 +10,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

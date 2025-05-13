@@ -5,7 +5,7 @@ import "../index.css";
 
 const API_KEY = "53d691ddd392e3fa19dc64cc8eba0027"; // Replace with your OpenWeatherMap key
 
-function App() {
+function CardWhether() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
 
@@ -78,4 +78,4 @@ function App() {
   );
 }
 
-export default App;
+export default CardWhether;
