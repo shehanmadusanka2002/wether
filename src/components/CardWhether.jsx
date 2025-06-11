@@ -3,11 +3,28 @@ import { FaSearch, FaWind } from "react-icons/fa";
 import { WiHumidity } from "react-icons/wi";
 import "../index.css";
 
-const API_KEY = "53d691ddd392e3fa19dc64cc8eba0027"; // Replace with your OpenWeatherMap key
+const API_KEY = "53d691ddd392e3fa19dc64cc8eba0027"; // Replace with your key
 
-function CardWhether() {
+const demoWeather = {
+  name: "Colombo",
+  main: {
+    temp: 30,
+    humidity: 78,
+  },
+  weather: [
+    {
+      description: "partly cloudy",
+      icon: "02d",
+    },
+  ],
+  wind: {
+    speed: 10,
+  },
+};
+
+function CardWeather() {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState(demoWeather);
 
   const fetchWeather = async () => {
     if (!city.trim()) return;
@@ -21,7 +38,6 @@ function CardWhether() {
         setWeather(data);
       } else {
         alert("City not found!");
-        setWeather(null);
       }
     } catch (error) {
       alert("Error fetching weather data.", error);
@@ -29,26 +45,26 @@ function CardWhether() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
-      <div className="bg-white bg-opacity-20 backdrop-blur-md p-8 rounded-3xl w-full max-w-md text-white shadow-2xl transition duration-300 ease-in-out">
-        <div className="flex items-center bg-white bg-opacity-30 rounded-full px-4 py-2 mb-6 shadow-inner">
+    <div className="min-h-screen bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 flex items-center justify-center p-6">
+      <div className="bg-white/20 backdrop-blur-xl p-8 rounded-3xl w-full max-w-md text-white shadow-2xl">
+        <div className="flex items-center bg-white/30 rounded-full px-4 py-2 mb-6">
           <input
             type="text"
-            placeholder="Enter city name..."
+            placeholder="Enter city..."
             className="bg-transparent focus:outline-none flex-grow text-black placeholder-white text-lg"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
           <button
             onClick={fetchWeather}
-            className="text-white hover:text-yellow-300 transition duration-200"
+            className="text-white hover:text-yellow-300 ml-2"
             title="Search"
           >
             <FaSearch size={20} />
           </button>
         </div>
 
-        {weather && weather.main && (
+        {weather && (
           <div className="text-center">
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
@@ -56,8 +72,8 @@ function CardWhether() {
               className="mx-auto mb-2"
             />
             <h1 className="text-5xl font-bold mb-2">{Math.round(weather.main.temp)}°C</h1>
-            <h2 className="text-2xl font-medium">{weather.name}</h2>
-            <p className="text-sm italic text-white/80 mb-4 capitalize">
+            <h2 className="text-2xl font-semibold">{weather.name}</h2>
+            <p className="text-sm italic text-white/80 capitalize mb-4">
               {weather.weather[0].description}
             </p>
 
@@ -78,4 +94,4 @@ function CardWhether() {
   );
 }
 
-export default CardWhether;
+export default CardWeather;
